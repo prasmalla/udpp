@@ -11,10 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160207151237) do
+ActiveRecord::Schema.define(version: 20160605235217) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "locations", force: :cascade do |t|
+    t.integer  "village_id"
+    t.integer  "riba_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "locations", ["riba_id"], name: "index_locations_on_riba_id", using: :btree
+  add_index "locations", ["village_id"], name: "index_locations_on_village_id", using: :btree
+
+  create_table "ribas", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "ribas", ["name"], name: "index_ribas_on_name", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name",                   default: "", null: false
@@ -45,4 +63,14 @@ ActiveRecord::Schema.define(version: 20160207151237) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
+  create_table "villages", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "villages", ["name"], name: "index_villages_on_name", using: :btree
+
+  add_foreign_key "locations", "ribas"
+  add_foreign_key "locations", "villages"
 end
