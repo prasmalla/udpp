@@ -71,6 +71,9 @@ GEM
       i18n (~> 0.5)
     figaro (1.1.1)
       thor (~> 0.14)
+    genealogy (2.1.1)
+      activerecord (>= 3.2)
+      activesupport (>= 3.2)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     i18n (0.7.0)
@@ -197,6 +200,7 @@ DEPENDENCIES
   devise
   faker
   figaro
+  genealogy
   jbuilder (~> 2.0)
   jquery-rails
   newrelic_rpm
