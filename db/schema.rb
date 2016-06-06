@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160606002015) do
+ActiveRecord::Schema.define(version: 20160606045814) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.string   "address1",             null: false
+    t.string   "address2"
+    t.string   "city",                 null: false
+    t.string   "state",      limit: 2, null: false
+    t.string   "zip",                  null: false
+    t.string   "home_phone"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
 
   create_table "locations", force: :cascade do |t|
     t.integer  "village_id"
@@ -60,6 +71,21 @@ ActiveRecord::Schema.define(version: 20160606002015) do
     t.integer  "father_id"
     t.integer  "mother_id"
     t.integer  "current_spouse_id"
+    t.string   "first_name",                          null: false
+    t.string   "middle_name"
+    t.string   "last_name",                           null: false
+    t.integer  "riba_id"
+    t.date     "birthday"
+    t.string   "work_phone"
+    t.string   "cell_phone"
+    t.integer  "address_id"
+    t.integer  "pin"
+    t.date     "valid_until"
+    t.integer  "village_id"
+    t.string   "immigration_status"
+    t.string   "occupation"
+    t.string   "education"
+    t.integer  "resident_years"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
@@ -69,7 +95,9 @@ ActiveRecord::Schema.define(version: 20160606002015) do
   add_index "users", ["father_id"], name: "index_users_on_father_id", using: :btree
   add_index "users", ["mother_id"], name: "index_users_on_mother_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["riba_id"], name: "index_users_on_riba_id", using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
+  add_index "users", ["village_id"], name: "index_users_on_village_id", using: :btree
 
   create_table "villages", force: :cascade do |t|
     t.string   "name"
